@@ -5,21 +5,51 @@ document.getElementById("btn-deposit").addEventListener("click", function () {
     2. get the value from the element
     3. convert string value to a number
     */
-  const newDepositAmount = getInputFieldValueById("deposit-field");
+  const depositField = document.getElementById('deposit-field');
+  const newDepositAmountString = depositField.value;
+
+  // input field validation
+  if (newDepositAmountString =='') {
+    alert('Please input Deposit amount');
+    return
+  }
+  
+  const newDepositAmount = parseInt(newDepositAmountString)
+  depositField.value = ``;
+  // console.log(newDepositAmount);
   /* 
     1. get previous deposit total by id
 
     */
-  const previousDepositTotal = getTextElementValueById("deposit-total");
+  const depositTotalElement = document.getElementById('deposit-total')
+  const previousDepositTotalString = depositTotalElement.innerText;
+  const previousDepositTotal = parseInt(previousDepositTotalString);
 
   // calculate new deposit total
   const newDepositTotal = previousDepositTotal + newDepositAmount;
-  console.log(newDepositTotal, previousDepositTotal, newDepositAmount);
+
   // set deposit total value
-  setTextElementValueById("deposit-total", newDepositTotal);
+  depositTotalElement.innerText = newDepositTotal;
+  // setTextElementValueById("deposit-total", newDepositTotal);
 
   // get previous balance by using the function
-  const previousBalanceTotal = getextElementValueById("balance-total");
+  const previousBalanceTotalElement = document.getElementById('balance-total');
+  const previousBalanceTotalString = previousBalanceTotalElement.innerText;
+  const previousBalanceTotal = parseInt(previousBalanceTotalString);
+  // console.log(typeof previousBalanceTotal, previousBalanceTotal);
+
   const newBalanceTotal = previousBalanceTotal + newDepositAmount;
-  setTextElementValueById("balance-total", newBalanceTotal);
-);
+  // console.log(newBalanceTotal);
+
+  // set the balance total
+  previousBalanceTotalElement.innerText = newBalanceTotal;
+
+  // if (depositField.value ==="") {
+  //   document.getElementById("btn-deposit").disabled = true;
+  // } else {
+  //   document.getElementById("btn-deposit").disabled = false;
+  // }
+});
+
+
+

@@ -10,11 +10,44 @@
 */
 
 document.getElementById("btn-withdraw").addEventListener("click", function () {
-  const newWithdrawAmount = getInputFieldValueById("withdraw-field");
-  const previousWithdrawTotal = getTextElementValueById("withdraw-total ");
+
+  const getWithdrawField = document.getElementById('withdraw-field');
+  const newWithdrawAmountString = getWithdrawField.value;
+ 
+  // input field validation
+  if (newWithdrawAmountString =='') {
+    alert('Please input Withdraw amount');
+    return
+  }
+
+  const newWithdrawAmount = parseInt(newWithdrawAmountString);
+  // console.log(typeof newWithdrawAmount, newWithdrawAmount);
+  getWithdrawField.value = ``;
+
+  const previousWithdrawTotalElement = document.getElementById('withdraw-total');
+  const previousWithdrawTotalString = previousWithdrawTotalElement.innerText;
+  const previousWithdrawTotal = parseInt(previousWithdrawTotalString);
+  // console.log(typeof previousWithdrawTotal, previousWithdrawTotal)
+
+  // calculate New Withdraw Total
   const newWithdrawTotal = previousWithdrawTotal + newWithdrawAmount;
-  setTextElementValueById(withdraw - total, newWithdrawTotal);
-  const previousBalanceTotal = getTextElementValueById("balance-total");
+  // console.log(newWithdrawTotal)
+
+  // set withdraw total value
+  previousWithdrawTotalElement.innerText = newWithdrawTotal;
+
+  // calculate New balance Total
+  const previousBalanceTotalElement = document.getElementById('balance-total');
+  const previousBalanceTotalString = previousBalanceTotalElement.innerText;
+  const previousBalanceTotal = parseInt(previousBalanceTotalString)
+  console.log(previousBalanceTotal);
+
+  // setTextElementValueById(withdraw - total, newWithdrawTotal);
+
   const newBalanceTotal = previousBalanceTotal - newWithdrawAmount;
-  setTextElementValueById("balance-total", newBalanceTotal);
+  console.log(newBalanceTotal);
+
+  // set the balance total
+  previousBalanceTotalElement.innerText = newBalanceTotal;
+  // setTextElementValueById("balance-total", newBalanceTotal);
 });
